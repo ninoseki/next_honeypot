@@ -1,0 +1,15 @@
+[Unit]
+Description=next-honeypot daemon
+Documentation=https://github.com/ninoseki/next-honeypot
+
+[Service]
+ExecStart = /opt/next-honeypot/next-honeypot.sh
+ExecRestart = /bin/kill -WINCH ${MAINPID}
+ExecStop = /bin/kill -WINCH ${MAINPID}
+Restart = no
+Type = simple
+User = next-honeypot
+Group = next-honeypot
+
+[Install]
+WantedBy = multi-user.target

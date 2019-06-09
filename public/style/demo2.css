@@ -1,0 +1,155 @@
+﻿/* ::::: style/common.css ::::: */
+
+* { font-family: Tahoma,Arial,sans-serif; font-size: 1em; }
+body { margin: 0.906em; background: rgb(255, 255, 255) none repeat scroll 0% 0%; font-size: 69%; }
+body.gui { margin: 0pt; background: rgb(190, 190, 190) none repeat scroll 0% 0%; text-align: center; }
+hr { border-left: 0; border-right: 0; border-top: 0; border-bottom: 0.09em dotted; background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(204, 204, 204); width: 100%; height: 0; }
+pre { margin: 0pt; padding: 1em; overflow: auto; width: 95%; font-family: "Courier New",Courier,monospace; background-color: rgb(247, 247, 247); }
+form { margin: 0pt; }
+input.num { text-align: right; }
+#wrapper { margin: 0pt auto; position: relative; text-align: left; width: 800px; }
+table.mainContent { width: 788px; }
+#content { background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+#header { background: rgb(200, 200, 250) none repeat scroll 0% 0%; width: 800px; height: 13.34em; padding-top: 0.908em; }
+.infopage #header { height: 6.612em; }
+#header #logo { background: transparent url('/graphics/logo.png') no-repeat scroll left center; height: 84px; width: 800px; margin-bottom: 0.272em; }
+#header #logo h1 { display: none; }
+#statusInfo { position: absolute; top: 0.908em; right: 0pt; width: 32.609em; text-align: right; color: rgb(204, 204, 204); }
+#statusInfo a { color: rgb(204, 204, 204); text-decoration: none; }
+#statusInfo a:hover { color: rgb(255, 255, 255); text-decoration: underline; }
+#menu { position: relative; width: 800px; }
+#menuSub { border-style: solid solid none; border-width: 0.09em; position: absolute; top: 2.265em; left: 0pt; width: 796px !important; width: 800px; padding-top: 0.362em; }
+#menuMainList, #menuSubList { margin: 0pt; padding: 0pt; }
+#menuMainList li, #menuSubList li { display: inline; float: left; list-style-type: none; }
+#menuMainList li span, #menuSubList li span, #menuMainList li a, #menuSubList li a { border-style: solid solid none; border-width: 0.09em; padding: 0.453em 0.906em; display: block; margin-left: 0.362em; text-decoration: none; }
+#menuMainList li span { position: relative; z-index: 1; font-weight: bold; padding-bottom: 0.626em; margin-top: 0pt; }
+#menuSubList li span { border-color: rgb(255, 255, 255) rgb(204, 204, 204) rgb(0, 0, 0) rgb(255, 255, 255); background: rgb(255, 255, 255) none repeat scroll 0% 0%; color: rgb(0, 0, 0); font-weight: normal; padding-bottom: 0.543em; }
+#menuMainList li a, #menuSubList li a { margin-top: 0.09em; }
+#menuMainList li a { border-color: rgb(85, 85, 85) rgb(34, 34, 34) rgb(0, 0, 0) rgb(85, 85, 85); background: rgb(51, 51, 51) none repeat scroll 0% 0%; color: rgb(153, 153, 153); font-weight: bold; }
+#menuSubList li a { font-weight: normal; }
+#menuMainList li a:hover, #menuSubList li a:hover { margin-top: 0pt; padding-bottom: 0.543em; }
+#menuMainList li a:hover { border-color: rgb(136, 136, 136) rgb(68, 68, 68) rgb(0, 0, 0) rgb(136, 136, 136); background: rgb(102, 102, 102) none repeat scroll 0% 0%; color: rgb(204, 204, 204); }
+#main, #helpContainer { position: relative; float: left; }
+#main #contents { padding: 0.906em; width: 62.536em; }
+#main #contentsInfo { padding: 0.906em; width: 70.471em; }
+#main #contentsInfo div.col2l { float: left; width: 34.774em; }
+#main #contentsInfo div.col2r { float: left; width: 34.774em; margin-left: 0.906em; }
+h2, h3, .submitFooter { border-style: solid; border-color: rgb(221, 221, 221) rgb(153, 153, 153) rgb(153, 153, 153) rgb(221, 221, 221); border-width: 0.09em; margin: 0pt 0pt 0.906em; padding: 0.181em 0.725em; background: rgb(204, 204, 204) none repeat scroll 0% 0%; color: rgb(0, 0, 0); letter-spacing: 0.09em; }
+.helpMenu {background: rgb(48, 81, 156) none repeat scroll 0% 0%; color: rgb(255, 255, 255); margin-right: 0.105em;}
+.setting { position: relative; margin-bottom: 0.453em; line-height: 1.993em; width: 100%; }
+.setting .label { float: left; width: 18.931em; }
+.setting .col29 { float: left; width: 38%; }
+.setting .col30 { float: left; width: 28%; }
+.setting .col31 { float: left; width: 40%; }
+.setting .col32 { float: left; width: 60%; }
+.setting .col43 { float: left; width: 75%; }
+.setting .col3r { float: right; }
+fieldset .setting .label { width: 18.116em; }
+fieldset .setting .label1 { float: left; width: 16em; }
+fieldset .setting .label2 { float: left; width: 25em; }
+.setting .default { display: block; position: absolute; color: rgb(102, 102, 102); top: 0pt; right: 0pt; width: 16.304em; }
+.warning { border: 0.181em solid rgb(255, 153, 153); padding: 0.725em; font-weight: bold; text-align: center; }
+fieldset { border: 0.101em solid rgb(204, 204, 204); margin: 0pt; padding: 0.725em; width: 20em;  }
+fieldset legend { padding: 0pt 0.272em; background: rgb(255, 255, 255) none repeat scroll 0% 0%; font-weight: bold; margin-left: -0.362em; }
+
+
+table tr th { border-style: solid; border-color: rgb(204, 204, 204) rgb(102, 102, 102) rgb(102, 102, 102) rgb(204, 204, 204); border-width: 0.09em; background: rgb(153, 153, 153) none repeat scroll 0% 0%; color: rgb(255, 255, 255); font-weight: normal; text-align: center; vertical-align: bottom; }
+/*table tr:hover { background: rgb(232, 232, 232) none repeat scroll 0% 0%; }*/
+table td { padding: 0pt; }
+#help { padding: 0.906em 0pt; width: 17.21em; height: 300pt; float: left; }
+#help dl { margin: 0pt; padding: 0pt; }
+#help dt.term { margin: 0pt 0pt 0.362em; font-weight: bold; }
+#help dd.definition { border-bottom: 0.09em dotted rgb(204, 204, 204); margin: 0pt 0pt 0.908em; padding-bottom: 0.908em; }
+#help a { display: block; position: absolute; top: 1.178em; right: 0.901em; text-align: right; text-decoration: none; text-transform: lowercase; }
+#help a:hover { text-decoration: underline; }
+.submitFooter { margin: 0pt; padding: 0.725em; text-align: center; }
+.submitFooter .button, .message div input { margin: 0pt 0.362em; padding: 0.362em 1.087em; }
+#floatKiller { clear: both; width: 1px; height: 1px; font-size: 1px; }
+div.center { text-align: center; }
+.message { border-style: solid; border-color: rgb(221, 221, 221) rgb(153, 153, 153) rgb(153, 153, 153) rgb(221, 221, 221); border-width: 0.09em; margin: 0pt auto; padding: 1.812em; background: rgb(204, 204, 204) none repeat scroll 0% 0%; max-width: 800px; font-weight: bold; text-align: center; }
+.message div input { margin-top: 1.449em; font-weight: normal; }
+.popup { padding: 0.906em; background: rgb(255, 255, 255) none repeat scroll 0% 0%; }
+.meter { border-style: solid; border-color: rgb(119, 119, 119) rgb(204, 204, 204) rgb(204, 204, 204) rgb(119, 119, 119); border-width: 0.09em; background: rgb(170, 170, 170) none repeat scroll 0% 0%; position: relative; float: right; margin-top: 0.09em; width: 14.49em; height: 1.268em; }
+.meter .bar { height: 1.268em; }
+.meter .text { position: absolute; top: 0pt; width: 100%; height: 1.268em; text-align: center; line-height: 1.181em; }
+td .meter { float: none; margin-top: 0pt; width: 99%; }
+.progressbar { border-style: solid; overflow: hidden; visibility: visible; position: relative; }
+.progressbarblock { position: absolute; }
+.textblink { text-decoration: blink; }
+.bin { background: transparent url('bin_bt.gif') no-repeat scroll center center; cursor: pointer; }
+body input.button { border-color: rgb(221, 221, 221) rgb(204, 204, 204) rgb(204, 204, 204) rgb(221, 221, 221); border-width: 0.1em; margin: 0pt 0.3em 0pt 0pt; padding: 0.2em 0.362em; cursor: pointer; }
+input.spaceradio { margin-right: 0.4em; }
+div.bulle { width: auto; background-color: rgb(255, 255, 225); position: absolute; visibility: hidden; z-index: 2000; }
+table.bulle { border: 0.09em solid rgb(0, 0, 0); margin: 0em; padding: 0em; width: auto; height: auto; text-align: justify; }
+td.bulle { border: 0em none ; padding: 0.09em; width: auto; height: auto; }
+
+/* ::::: style/elegant/style.css ::::: */
+
+#menuSub, #menuMainList li span, #help h2 { border-color: rgb(73, 111, 199); background: rgb(48, 81, 156) none repeat scroll 0% 0%; color: rgb(255, 255, 255); }
+#menuSubList li a { border-color: rgb(99, 132, 207); background: rgb(73, 111, 199) none repeat scroll 0% 0%; color: rgb(255, 255, 255); }
+#menuSubList li a:hover { border-color: rgb(132, 157, 217); background: rgb(99, 132, 207) none repeat scroll 0% 0%; color: rgb(255, 255, 255); }
+fieldset legend { color: rgb(48, 81, 156); }
+#help a { color: blue; }
+
+.meter .bar { background-color: rgb(73, 111, 199); }
+.meter .text { color: rgb(255, 255, 255); }
+.progressbar { border-color: rgb(153, 153, 153); border-width: 0.09em; background-color: rgb(255, 255, 255); font-size: 0.09em; }
+.progressbarblock { background-color: rgb(73, 111, 199); font-size: 0.09em; }
+input.button { background: rgb(73, 111, 199) none repeat scroll 0% 0%; color: rgb(255, 255, 255); }
+input.BtnGrey { background: rgb(192, 192, 192) none repeat scroll 0% 0%; color: rgb(255, 255, 255); }
+input.button:hover { background: rgb(99, 132, 207) none repeat scroll 0% 0%; color: rgb(255, 255, 255); }
+#B , #A , #C1, #C2, #C3, #C4, #D  { position: absolute; width: 90%; }
+#B .mode { margin-left: 50pt; color: orange }
+.table1	{ display:table; border-collapse:separate; width:100%;  }
+.row1 	{ display:table-row; }
+.row1h { display:table-row; background: #496fc7; height: 1.5em;  }
+#ihead { display:table-row; background: #496fc7; height: 1.5em;  }
+.row1 div { display:table-cell; }
+.row1h div { display:table-cell; background: rgb(204, 204, 204); height:2em; }
+.row1 .col31 { width:33%; }
+.row1 .col21 { width:50%; }
+.row1 .col21 input { border: 0; background: transparent; }
+.row1 .col11 { width:100%; }
+.row1 .col41 { width:25%; }
+.infolist input { border: 0;  padding: 4;  margin: 0; background: transparent; }
+.infolist1 input { border: 0;  padding: 4;  margin: 0; background: transparent; text-align: center;}
+.infolist tr:hover { background: rgb(232, 232, 232) none repeat scroll 0% 0%; }
+
+.help1 { padding-bottom: 300pt; }
+.help1 dl { margin: 0pt; padding: 0pt; }
+.help1 dt { margin: 0pt 0pt 0.362em; font-weight: bold; color: blue; }
+.help1 dd { border-bottom: 0.09em dotted rgb(204, 204, 204); margin: 0pt 0pt 0.908em; padding-bottom: 0.908em; }
+
+.black_overlay{display: none; position: absolute; top: 0%; left: 0%; width: 100%; height: 1024px; background-color: black; z-index:1001; -moz-opacity: 0.8; opacity:.80; filter: alpha(opacity=80); }
+.white_content {display: none; position: absolute; top: 22%; left: 33%; width: 350px; height: 150px; border: 16px solid #FFF; border-bottom:none;  z-index:1002; -moz-opacity: 1; opacity:1; filter: alpha(opacity=100); overflow: auto; background-color: white;}
+.ie_overlay { position:absolute;visibility:inherit; top:22px; left:33px; width:350px; height:100px; z-index:-1;opacity:.0;filter: alpha( opacity=0 ); -moz-opacity: 0;}
+.popupmenu_popup {
+color: #154BA0;
+border: 1px solid #86B9D6;
+background: #D9EEF9;
+filter: Alpha(Opacity=50, Style=0);
+opacity: 0.50;
+position: absolute;
+z-index: 30;
+left:300px;
+top: 64px;
+height: 69px;
+width:134px;
+}
+
+.popupmenu_text {
+color: #154BA0;
+position: absolute;
+z-index: 40;
+left:301px;
+top: 65px;
+height: 69px;
+width:134px;
+text-align:center;
+}
+
+font.help_head{
+  font-weight: bold;
+  font-size: 9pt;  
+  color: rgb(73, 111, 199);
+}
