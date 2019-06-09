@@ -1,0 +1,579 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=utf-8">
+<link rel="StyleSheet" href="/style/demo2.css" type="text/css" />
+
+<script type="text/javascript" src="/lang/b28n.js"></script>
+<script type="text/javascript" src="/lang/wdk.js"></script>
+<script type="text/javascript" src="/lang/product.js"></script>
+
+<script language="JavaScript" type="text/javascript">
+Butterlate.setTextDomain("admin");
+document.title = "NEXT-2204N";
+var timerID;
+var http_request = false;
+var wanMode = "DHCP";
+var staticIp = "0.0.0.0";
+var staticNetmask = "0.0.0.0";
+var staticGateway = "0.0.0.0";
+var staticPriDns = "1.53.252.215";
+var staticSecDns = "1.53.252.164";
+var lang = "zhcn";
+
+function initLanguage()
+{
+	var cook = "en";
+	var lang_en = "1";
+	var lang_zhtw = "0";
+	var lang_zhcn = "1";
+
+	if (document.cookie.length > 0) {
+		var s = document.cookie.indexOf("language=");
+		var e = document.cookie.indexOf(";", s);
+		if (s != -1) {
+			if (e == -1)
+				cook = document.cookie.substring(s+9);
+			else
+				cook = document.cookie.substring(s+9, e);
+		}
+	}
+
+	if (lang == "en") {
+		document.cookie="language=en; path=/";
+		if (cook != lang)
+			window.location.reload();
+		if (lang_en != "1") {
+			if (lang_zhtw == "1") {
+				document.cookie="language=zhtw; path=/";
+				window.location.reload();
+			}
+			else if (lang_zhcn == "1") {
+				document.cookie="language=zhcn; path=/";
+				window.location.reload();
+			}
+		}
+	}
+
+	else if (lang == "zhtw") {
+		document.cookie="language=zhtw; path=/";
+		if (cook != lang)
+			window.location.reload();
+		if (lang_zhtw != "1") {
+			if (lang_en == "1") {
+				document.cookie="language=en; path=/";
+				window.location.reload();
+			}
+			else if (lang_zhcn == "1") {
+				document.cookie="language=zhcn; path=/";
+				window.location.reload();
+			}
+		}
+	}
+	else if (lang == "zhcn") {
+		document.cookie="language=zhcn; path=/";
+		if (cook != lang)
+			window.location.reload();
+		if (lang_zhcn != "1") {
+			if (lang_en == "1") {
+				document.cookie="language=en; path=/";
+				window.location.reload();
+			}
+			else if (lang_zhtw == "1") {
+				document.cookie="language=zhtw; path=/";
+				window.location.reload();
+			}
+		}
+	}
+
+}
+
+function makeRequest(url, content,fun) {
+    http_request = false;
+    if (window.XMLHttpRequest) { // Mozilla, Safari,...
+        http_request = new XMLHttpRequest();
+        if (http_request.overrideMimeType) {
+           // http_request.overrideMimeType('text/xml');
+        }
+    } else if (window.ActiveXObject) { // IE
+        try {
+            http_request = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            try {
+            http_request = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {}
+        }
+    }
+    if (!http_request) {
+        alert(_("xmlhttp alert"));
+        return false;
+    }
+    http_request.onreadystatechange = fun;
+    http_request.open('POST', url, true);
+    http_request.send(content);
+}
+
+//JCG guochaoguo
+function alertContents1() {
+    if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+		document.getElementById("sysuptime").innerHTML =http_request.responseText;
+		if (wanMode == "STATIC") {
+	    		document.getElementById("wanIp").innerHTML = staticIp;
+	    		document.getElementById("wanNetmask").innerHTML = staticNetmask;
+	     		document.getElementById("defaultgw").innerHTML = staticGateway;
+	     		document.getElementById("pridns").innerHTML = staticPriDns;
+	    		document.getElementById("secdns").innerHTML = staticSecDns;
+		}
+		else {
+			makeRequest("/goform/getWanIpAddress", "wanip",alertContents2);
+		}
+        }
+    }
+
+}
+
+//JCG guochaoguo
+function alertContents2() {
+    if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+		if(http_request.responseText!="-1"){
+	    		document.getElementById("wanIp").innerHTML =http_request.responseText;
+		}
+		makeRequest("/goform/getdefaultGateWay", "defaultgw",alertContents3);
+        }
+        else {
+       		//alert('There was a problem with the request.');
+       	}
+    }
+
+}
+
+//JCG guochaoguo
+function alertContents3() {
+    if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+		if(http_request.responseText!="-1"){
+	     		document.getElementById("defaultgw").innerHTML =http_request.responseText;
+		}
+		makeRequest("/goform/getPriDns", "pridns",alertContents4);
+        }
+        else {
+       		//alert(_("request error"));
+       	}
+    }
+
+}
+
+//JCG guochaoguo
+function alertContents4() {
+    if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+		if(http_request.responseText!="-1"){
+	     		document.getElementById("pridns").innerHTML =http_request.responseText;
+		}
+		makeRequest("/goform/getSecDns", "secdns",alertContents5);
+        }
+        else {
+       		//alert(_("request error"));
+       	}
+    }
+
+}
+
+//JCG guochaoguo
+function alertContents5() {
+    if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+		if(http_request.responseText!="-1"){
+	    		document.getElementById("secdns").innerHTML =http_request.responseText;
+		}
+	}
+        else {
+       		//alert(_("request error"));
+       	}
+    }
+
+}
+
+//JCG guochaoguo
+function alertContents6() {
+    if (http_request.readyState == 4) {
+        if (http_request.status == 200) {
+		var str =http_request.responseText;
+		var all = new Array();
+
+		if(str != "-1"){
+			all = str.split(",");
+			for(i=0; i< all.length-1; i+=3){
+				var imagename1="image"+i;
+				if(all[i] == "1"){
+					if(all[i+1] == "10")
+						 document.getElementById(imagename1).src ="/graphics/10.gif";
+					else if(all[i+1] == "100")
+						 document.getElementById(imagename1).src ="/graphics/100.gif";
+
+				}
+				else if(all[i] == "0"){
+					document.getElementById(imagename1).src ="/graphics/empty.gif";
+				}
+			}
+		}
+		makeRequest("/goform/getSystemUptime", "sysUptime", alertContents1);
+        }
+        else {
+       		//alert(_("request error"));
+       	}
+    }
+}
+
+//JCG guochaoguo
+function sendRequest()
+{
+	 makeRequest("/goform/getPortSta", "state", alertContents6);
+}
+
+
+function style_display_on()
+{
+	if (window.ActiveXObject)
+	{ // IE
+		return "block";
+	}
+	else if (window.XMLHttpRequest)
+	{ // Mozilla, Safari,...
+		return "table-row";
+	}
+}
+
+function showOpMode()
+{
+	var opmode = 1* 1;
+	var e = document.getElementById("statusOpModev");
+	if (opmode == 0)
+		//document.write("Bridge Mode");
+		e.innerHTML = _("status opmode mode b");
+	else if (opmode == 1)
+		e.innerHTML = _("status opmode mode g");
+		//document.write("Gateway Mode");
+	else if (opmode == 2)
+		e.innerHTML = _("status opmode mode e");
+		//document.write("Ethernet Converter Mode");
+	else if (opmode == 3)
+		e.innerHTML = _("status opmode mode a");
+		//document.write("AP Client Mode");
+	else
+		e.innerHTML = _("status opmode mode unknown");
+		//document.write("Unknown");
+}
+
+function showPortStatus()
+{
+	var str = "1,100,F,0,10,H,0,10,H,0,10,H,0,10,H,";
+	var all = new Array();
+
+	if(str == "-1"){
+		document.write("not support");
+		return ;
+	}
+
+	all = str.split(",");
+	for(i=0; i< all.length-1; i+=3){
+		var imagename="image"+i;
+		//document.write("<td>");
+		if(all[i] == "1"){
+			if(all[i+1] == "10")
+				document.write("<img id="+imagename+" src=/graphics/10.gif> &nbsp;&nbsp;");
+			else if(all[i+1] == "100")
+				document.write("<img id="+imagename+" src=/graphics/100.gif>&nbsp;&nbsp; ");
+
+//			if(all[i+2] == "F")
+//				document.write("Full ");
+//			else(all[i+2] == "H")
+//				document.write("Half ");
+		}else if(all[i] == "0"){
+				document.write("<img id="+imagename+" src=/graphics/empty.gif>&nbsp;&nbsp; ");
+		}
+		//document.write("</td>");
+	}
+}
+
+function initTranslation()
+{
+	var e = document.getElementById("statusTitle");
+	e.innerHTML = _("status title");
+	e = document.getElementById("statusIntroduction");
+	e.innerHTML = _("status introduction");
+
+	e = document.getElementById("statusSysInfo");
+	e.innerHTML = _("status system information");
+	e = document.getElementById("statusModelName");
+	e.innerHTML = _("status model name");
+/*
+	e = document.getElementById("statusSDKVersion");
+	e.innerHTML = _("status sdk version");
+*/
+	e = document.getElementById("statusFwVersion");
+	e.innerHTML = _("status firmware version");
+	e = document.getElementById("statusSysUpTime");
+	e.innerHTML = _("status system up time");
+/*
+	e = document.getElementById("statusSysPlatform");
+	e.innerHTML = _("status system platform");
+*/
+	e = document.getElementById("statusOPMode");
+	e.innerHTML = _("status operate mode");
+
+	e = document.getElementById("statusInternetConfig");
+	e.innerHTML = _("status internet config");
+	e = document.getElementById("statusConnectedType");
+	e.innerHTML = _("status connect type");
+	e = document.getElementById("statusWANIPAddr");
+	e.innerHTML = _("status wan ipaddr");
+	e = document.getElementById("statusSubnetMask");
+	e.innerHTML = _("status subnet mask");
+	e = document.getElementById("statusDefaultGW");
+	e.innerHTML = _("status default gateway");
+	e = document.getElementById("statusPrimaryDNS");
+	e.innerHTML = _("status primary dns");
+	e = document.getElementById("statusSecondaryDNS");
+	e.innerHTML = _("status secondary dns");
+	e = document.getElementById("statusWANMAC");
+	e.innerHTML = _("status mac");
+
+	e = document.getElementById("statusLocalNet");
+	e.innerHTML = _("status local network");
+	e = document.getElementById("statusLANIPAddr");
+	e.innerHTML = _("status lan ipaddr");
+	e = document.getElementById("statusLocalNetmask");
+	e.innerHTML = _("status local netmask");
+	e = document.getElementById("statusLANMAC");
+	e.innerHTML = _("status mac");
+
+	e = document.getElementById("statusEthPortStatus");
+	e.innerHTML = _("status ethernet port status");
+
+	//e = document.getElementById("help_more");
+	//e.innerHTML= _("help_more");
+	e = document.getElementById("helpMenu");
+	e.innerHTML = _("help");
+}
+
+function showWanConnectionMode()
+{
+	var e = document.getElementById("statusWanMode");
+
+	if (wanMode == "STATIC") {
+		e.innerHTML = _("wan connection type static");
+	}
+	else if (wanMode == "DHCP") {
+		e.innerHTML = _("wan connection type dhcp");
+	}
+	else if (wanMode == "PPPOE") {
+		e.innerHTML = _("wan connection type pppoe");
+	}
+	else if (wanMode == "L2TP") {
+		e.innerHTML = _("wan connection type l2tp");
+	}
+	else if (wanMode == "PPTP") {
+		e.innerHTML = _("wan connection type pptp");
+	}
+	else {
+		e.innerHTML = _("wan connection type unknown");
+	}
+}
+
+function PageInit()
+{
+	var ethtoolb;
+	timerID=setInterval("sendRequest()",1000);
+	ethtoolb = "1";
+
+	initLanguage();
+	initTranslation();
+
+	showOpMode();
+	showWanConnectionMode();
+
+	if (ethtoolb == "1")
+	{
+		document.getElementById("div_ethtool").style.visibility = "visible";
+		//document.getElementById("div_ethtool").style.display = style_display_on();
+	}
+	else
+	{
+		document.getElementById("div_ethtool").style.visibility = "hidden";
+		document.getElementById("div_ethtool").style.display = "none";
+	}
+}
+</script>
+</HEAD>
+<body class="gui" onload="PageInit()">
+<script language="javascript">header();</script>
+
+<TABLE border=0 cellSpacing=0 cellPadding=0 class="mainContent">
+  <TBODY>
+  <TR>
+    <TD class="left" width=80% align="center" valign="top">
+  	<br>
+
+  	<fieldset align=center style="width:90%;">
+    	<LEGEND  id="statusSysInfo">System Info</LEGEND>
+
+      	<TABLE class="content" width=90% cellSpacing=0 cellPadding=0 >
+        <TBODY>
+
+        <TR>
+          <TD width=50%>&nbsp;</TD>
+          <TD width=50%>&nbsp;</TD>
+        </TR>
+	<tr>
+	  <td class="head" id="statusModelName">Model Name</td>
+	  <td>NEXT-2204N&nbsp;</td>
+	</tr>
+	<!--tr>
+	  <td class="head" id="statusSDKVersion">SDK Version</td>
+	  <td>3.3.2.0&nbsp;</td>
+	</tr-->
+	<tr>
+	  <td class="head" id="statusFwVersion">Firmware Version</td>
+	  <td>7.8.004.900</td>
+	</tr>
+	<tr>
+	  <td class="head" id="statusSysUpTime">System Up Time</td>
+	  <td id=sysuptime>907333</td>
+	</tr>
+	<!--tr>
+	  <td class="head" id="statusSysPlatform">System Platform</td>
+	  <td>RT3052 embedded switch</td>
+	</tr-->
+	<tr>
+	  <td class="head" id="statusOPMode">Operation Mode</td>
+	  <td id="statusOpModev">Gateway</td>
+	</tr>
+
+        </TBODY>
+       </TABLE>
+	</fieldset>
+
+  	<br><br>
+
+    	<fieldset id=wan_statu align=center style="width:90%;">
+    	<LEGEND id="statusInternetConfig">Internet Configurations</LEGEND>
+
+      	<TABLE class="content" width=90% cellSpacing=0 cellPadding=0 >
+        <TBODY>
+
+        <TR>
+          <TD width=50%>&nbsp;</TD>
+          <TD width=50%>&nbsp;</TD>
+        </TR>
+ 	<tr>
+ 	  <td class="head" id="statusConnectedType">Connected Type</td>
+ 	  <td id="statusWanMode">DHCP </td>
+ 	</tr>
+ 	<tr>
+ 	  <td class="head" id="statusWANIPAddr">WAN IP Address</td>
+ 	  <td><span id=wanIp><%= host %>&nbsp;</span></td>
+ 	</tr>
+ 	<tr>
+ 	  <td class="head" id="statusSubnetMask">Subnet Mask</td>
+ 	  <td><span id="wanNetmask">255.255.255.0</span>&nbsp;</td>
+ 	</tr>
+ 	<tr>
+ 	  <td class="head" id="statusDefaultGW">Default Gateway</td>
+ 	  <td><span id=defaultgw>218.155.16.1</span>&nbsp;</td>
+ 	</tr>
+ 	<tr>
+ 	  <td class="head" id="statusPrimaryDNS">Primary Domain Name Server</td>
+ 	  <td><span id=pridns>1.53.252.215</span>&nbsp;</td>
+ 	</tr>
+ 	<tr>
+ 	  <td class="head" id="statusSecondaryDNS">Secondary Domain Name Server</td>
+ 	  <td><span id=secdns>1.53.252.164</span>&nbsp;</td>
+ 	</tr>
+ 	<tr>
+ 	  <td class="head" id="statusWANMAC">MAC Address</td>
+ 	  <td>00:E0:4B:91:A1:CC&nbsp;</td>
+ 	</tr>
+
+        </TBODY>
+       </TABLE>
+	</fieldset>
+
+  	<br><br>
+
+  	<fieldset id=lan_statu align=center style="width:90%;">
+    	<LEGEND id="statusLocalNet">Local Network</LEGEND>
+
+      	<TABLE class="content" width=90% cellSpacing=0 cellPadding=0 >
+        <TBODY>
+
+        <TR>
+          <TD width=50%>&nbsp;</TD>
+          <TD width=50%>&nbsp;</TD>
+        </TR>
+	<tr>
+	  <td class="head" id="statusLANIPAddr">Local IP Address</td>
+	  <td>192.168.0.1&nbsp;</td>
+	</tr>
+	<tr>
+	  <td class="head" id="statusLocalNetmask">Local Netmask</td>
+	  <td>255.255.255.0&nbsp;</td>
+	</tr>
+	<tr>
+	  <td class="head" id="statusLANMAC">MAC Address</td>
+	  <td>00:E0:4B:91:A1:CC&nbsp;</td>
+	</tr>
+
+        </TBODY>
+       </TABLE>
+	</fieldset>
+
+	<br><br>
+
+  	<fieldset id=div_ethtool align=center style="width:90%;">
+    	<LEGEND id="statusEthPortStatus">Ethernet Port Status</LEGEND>
+
+      	<TABLE class="content" width=90% cellSpacing=0 cellPadding=0 >
+        <TBODY>
+
+        <TR>
+          <TD width=50%>&nbsp;</TD>
+          <TD width=50%>&nbsp;</TD>
+        </TR>
+	<tr>
+	  <td width=100% colspan=2>
+	    <script  type="text/javascript" >
+	       showPortStatus();
+	    </script>
+	  </td>
+	</tr>
+
+        </TBODY>
+       </TABLE>
+	</fieldset>
+
+
+  <br><br>
+  </TD>
+
+   <TD valign=top width=20%>
+   	<br>
+   	<div id=helps><h2 class="helpMenu" id="helpMenu">Help</h2></div>
+
+	<div>
+		<font class="help_head"  id="statusTitle">Access Point Status</font><br>
+		<span id="statusIntroduction">Let's take a look at the status of wireless SoC Platform.</span><br><br>
+		<!--b><a id="help_more"  target="_blank" href="/help.asp#help_status">More...</a></b-->
+   	</div>
+
+   </TD>
+
+   </TBODY>
+   </table>
+
+<script language="javascript">footer(1);</script>
+</body>
+</html>
+
