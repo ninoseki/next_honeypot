@@ -19,6 +19,10 @@ RSpec.describe Next do
     before { get "/" }
 
     it do
+      expect(last_request.env["HTTP_VERSION"]).to eq("HTTP/1.0")
+    end
+
+    it do
       expect(last_response.status).to eq(302)
     end
   end

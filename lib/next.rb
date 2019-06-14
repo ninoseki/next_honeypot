@@ -12,6 +12,8 @@ require "next/rack/spy"
 module Next
   class Application
     def call(env)
+      env["HTTP_VERSION"] = "HTTP/1.0"
+
       req = Rack::Request.new(env)
       method = req.request_method
       path = req.path
