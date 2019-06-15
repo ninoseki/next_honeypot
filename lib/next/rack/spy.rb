@@ -54,7 +54,7 @@ module Rack
         hostname: req.host_with_port,
         request_line: request_line(req),
         status_code: res.status,
-        type: "CPG-honey",
+        type: "NEXT-honeypot",
         user_agent: req.user_agent,
         version: req.env["HTTP_VERSION"],
       }
