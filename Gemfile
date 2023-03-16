@@ -5,7 +5,7 @@ ruby "~> 2.6.0"
 gem "dotenv", "~> 2.5"
 gem "logstash-logger", "~> 0.26"
 gem "puma", "~> 3.12"
-gem "rack", "~> 2.1"
+gem "rack", "~> 2.2"
 
 group :development, :test do
   gem 'coveralls', "~> 0.8", require: false
